@@ -1,0 +1,58 @@
+webview:
+	loadUrl("http://slashdot.org/");
+	
+	String summary = "<html><body>You scored <b>192</b> points.</body></html>";
+	loadData(summary, "text/html", null);
+	canGoBack()/canGoForward()/goBack()/goForward()
+	clearCache(boolean includeDiskFiles)
+	getCertificate():SslCertificate
+	reload()
+	addJavascriptInterface(...)	
+	
+WebSettings
+	setAllowFileAccess(...)
+	setAppCacheEnabled(...)
+	setAppCachePath(...)
+	setCacheMode(...)
+	setDefaultFontSize(...)
+	setLayoutAlgorithm(...)
+	supportZoom()
+	setGeolocationEnabled(...)
+	setJavaScriptEnabled(...)	
+WebChromeClient
+	onJsAlert(...)
+	onProgressChanged(...)
+WebViewClient
+	onPageFinished(...)
+	onPageStarted(...)
+	onReceivedError(...) : 
+	shouldOverrideUrlLoading(...)	: not called in post calls ; if returns true means I handled the url so webview dont have to handle this.
+	shouldInterceptRequest(...) : called if any resource has been requested
+	
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: theme=light
+Set-Cookie: sessionToken=abc123; Expires=Wed, 09 Jun 2021 10:18:14 GMT
+
+GET /spec.html HTTP/1.1
+Host: www.example.org
+Cookie: theme=light; sessionToken=abc123
+
+connection.setRequestProperty("Cookie", cookies);
+	
+CookieManager is CookieHandler -> CookieStore() + CookiePolicy( ACCEPT_ALL, ACCEPT_NONE and ACCEPT_ORIGINAL_SERVER)
+Cookies were designed to be a reliable mechanism for websites to remember stateful information (such as items added in the shopping cart in an online store)
+ flush()
+ setCookie(String url, String value)
+ 
+ 
+CookieStore->HttpCookie
+	add(URI uri, HttpCookie cookie)
+	get(URI uri): return List<HttpCookie>
+HttpCookie(String name, String value)
+	getMaxAge()->Returns the Max-Age attribute, in delta-seconds.
+	getName/getValue/getVersion/...
+
+/data/data/your.apps.package.name/databases/webview.db
+select * from cookies
+	
